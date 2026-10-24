@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+
+# Data (download separately; see data/README.md)
+data/*
+!data/README.md
+
+# Quick test runs
+code/empirical/results/*_quick.npz
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
