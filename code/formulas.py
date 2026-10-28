@@ -1,4 +1,4 @@
-"""Non-Gaussian experiment-size approximations (Appendix C), for the cell estimator with a
+"""Non-Gaussian experiment-size approximations (Appendix D), for the cell estimator with a
 known baseline. Cells make effects discrete, so the effect density g is a Gaussian-kernel
 smoothing of the cell effects with bandwidth BW standard deviations of beta."""
 import numpy as np

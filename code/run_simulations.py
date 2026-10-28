@@ -3,7 +3,7 @@
     python run_simulations.py              # full run, 3,000 replications (slow)
     python run_simulations.py --reps 100   # quick check with fewer replications
 
-Scenarios: rare and common populations with r = 0.8, 0.4, 0.2, 0.1 (Tables 2-3, Figure 5);
+Scenarios: rare and common populations with r = 0.8, 0.4, 0.2, 0.1 (Tables 2 and 3, Figure 7);
 the reversed rare population (last row of Table 3); and the straddling population with a
 common shift and with r = 0.4 (Figure 4). The random seeds reproduce the paper's numbers.
 """

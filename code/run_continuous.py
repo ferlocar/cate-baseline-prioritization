@@ -1,4 +1,4 @@
-"""Check Proposition 10 without cells (Appendix D) and save results/continuous.json.
+"""Check Proposition 8 without cells (Appendix E) and save results/continuous.json.
 
 A continuous rare population: 400,000 people with indices uniform between baselines of 3%
 and 20%, expected shift 0.5, and unpredictable shifts eta ~ N(0, (0.5 r)^2). The effect

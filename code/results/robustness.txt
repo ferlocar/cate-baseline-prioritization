@@ -1,0 +1,17 @@
+Robustness checks (robustness.py), equal-n design
+
+1. BATE treated share (straddling, K=50): value at n=3k / 10k
+   r=0.0: 3%: 89.1/96.7 | 6.6%: 89.5/96.9 | 10%: 89.4/96.8 | 20%: 88.5/96.4 | 50%: 82.5/94.2
+   r=0.4: 3%-20%: 44/48, CATE overtakes BATE at 5,760 | 50%: 40.8/46.5, CATE overtakes at 4,750
+2. CATE treated share, crossover vs baseline prioritization (average)
+   rare 0.4: 40%: 18,400 | 50%: 15,160 | 60%: 18,400 | Neyman 54.4%: 15,160
+   rare 0.2: 40%: 127,360 | 50%: 104,960 | 60%: 104,960 | Neyman: 104,960
+   common 0.4: 40%: 39,890 | 50%: 32,870 | 60%: 39,890 | Neyman 46.4%: 32,870
+3. Continuity correction in BATE baseline: no effect (71/89/97 at 1k/3k/10k for all three)
+4. Coupled vs independent samples: identical crossovers (rare 0.4, common 0.4, straddling 0.4)
+5. Seeds (3 each, coarse grid): known vs equal-n crossovers
+   rare 0.4: 10-12k vs 15k (1.38x) | rare 0.2: 71k vs 105-127k (1.58x) | common 0.4: 15k vs 33-40k (2.48x) | common 0.2: 71k vs 188k (2.63x)
+6. Best BATE share beyond the checked case (K=50, predicted 6.6%), n=10k:
+   straddling r=0.4: argmin 4.5%, fitted 6.0%, balanced/best 1.85
+   shift 1.0: argmin 6.6%, fitted 6.5%, balanced/best 1.75
+   shift 0.25: argmin 6.6%, fitted 6.2%, balanced/best 1.82

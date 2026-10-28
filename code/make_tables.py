@@ -1,15 +1,17 @@
-"""Print Tables 2 and 3 and the numbers quoted in the text and Appendix D, from
+"""Print Tables 2 and 3 and the numbers quoted in the text and Appendix E, from
 results/simulations.json and results/continuous.json. Reported sizes are those actually
 simulated, 100 * floor(n / 100)."""
 import json
 import numpy as np
 from model import EXPECTED_SHIFT as D, make_population, normalized_qini, baseline_curve, best_curve, scenario
-from experiments import simulated_size as sim
+from experiments import simulated_size as _sim
+# Sizes in treated people: each simulated experiment of 100m people has 50m treated (the paper's units).
+sim = lambda n: None if n is None else _sim(n) // 2
 from formulas import n_local, n_bar
 from run_simulations import R_VALUES
 
 fmt = lambda n: '--' if n is None else f'{int(n):,}'
-r100 = lambda x: int(round(x, -2))
+r100 = lambda x: int(round(x, -2)) if x >= 1000 else int(round(x, -1))
 pct = lambda x: f'{100 * x:.0f}%'
 ROWS = [(name, r) for name in ['rare', 'common'] for r in R_VALUES]
 
@@ -19,23 +21,23 @@ def main():
     print('TABLE 2: population, r, forgone share | baseline known: n*, simulated | same experiment: n*, simulated')
     for name, r in ROWS:
         x = S[f'{name}_{r}']
-        same = 'any' if x['nstar_same'] < 0 else fmt(r100(x['nstar_same']))
-        print(f'{name:7s} {r:<4} {pct(x["forgone_share"]):>4} | {fmt(r100(x["nstar_known"])):>8} {fmt(sim(x["n_avg_known"])):>8} | {same:>8} {fmt(sim(x["n_avg_same"])):>8}')
+        same = 'any' if x['nstar_same'] < 0 else fmt(r100(x['nstar_same'] / 2))
+        print(f'{name:7s} {r:<4} {pct(x["forgone_share"]):>4} | {fmt(r100(x["nstar_known"] / 2)):>8} {fmt(sim(x["n_avg_known"])):>8} | {same:>8} {fmt(sim(x["n_avg_same"])):>8}')
 
     print('\nTABLE 3: population, r, forgone share, n*, top 10%, top 50%, top 80%, everywhere')
     for key in [f'{n}_{r}' for n, r in ROWS] + ['reversed']:
         x = S[key]; w = x['win_by_u']
-        print(f'{key:11s} {pct(x["forgone_share"]):>4} {fmt(r100(x["nstar_known"])):>8} ' +
+        print(f'{key:11s} {pct(x["forgone_share"]):>4} {fmt(r100(x["nstar_known"] / 2)):>8} ' +
               ' '.join(f'{fmt(sim(v)):>10}' for v in [w[4], w[24], w[39], x['n_all_known']]))
 
     print('\nAPPENDIX D: accuracy of the approximations (baseline known)')
     for key in [f'{n}_{r}' for n, r in ROWS] + ['reversed']:
         x = S[key]; pop, sign = scenario(key)
-        simulated = sim(x['n_avg_known']); nb = n_bar(pop)
+        simulated = sim(x['n_avg_known']); nb = n_bar(pop) / 2
         by_u = np.array([np.nan if v is None else sim(v) for v in x['win_by_u'][:45]], float)
-        pred = n_local(pop, sign)[:45]
+        pred = n_local(pop, sign)[:45] / 2
         ratio = (pred / by_u)[9:45]; ratio = ratio[np.isfinite(ratio)]           # fractions 20%-90%
-        print(f'{key:11s} n*/sim {x["nstar_known"] / simulated:.2f}  n_bar* {fmt(r100(nb)):>8} (n_bar*/sim {nb / simulated:.2f})'
+        print(f'{key:11s} n*/sim {x["nstar_known"] / 2 / simulated:.2f}  n_bar* {fmt(r100(nb)):>8} (n_bar*/sim {nb / simulated:.2f})'
               f'  fraction-specific formula / sim, median over 20-90%: {np.median(ratio):.2f}')
         if key == 'reversed':
             print(f'            average crossover {fmt(sim(x["n_avg_known"]))}; top 90%: {fmt(sim(x["win_by_u"][44]))}; '

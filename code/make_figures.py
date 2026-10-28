@@ -1,8 +1,10 @@
-"""Print the plotted coordinates of Figures 3B, 4, and 5 (pgfplots format)."""
+"""Print the plotted coordinates of Figures 3B, 4, and 7 (pgfplots format)."""
 import json
 import numpy as np
 from model import F, f, logit, make_population, normalized_qini, scenario, EXPECTED_SHIFT as D
-from experiments import simulated_size as sim
+from experiments import simulated_size as _sim
+# Sizes in treated people: each simulated experiment of 100m people has 50m treated (the paper's units).
+sim = lambda n: None if n is None else _sim(n) // 2
 from formulas import n_local
 
 S = json.load(open('results/simulations.json'))
@@ -37,9 +39,9 @@ def figure_4():
 def figure_5():
     for key in ['rare_0.4', 'rare_0.2']:
         x = S[key]; pop, sign = scenario(key)
-        print(f'FIGURE 5 {key}  n*: {x["nstar_known"]:.0f}')
+        print(f'FIGURE 7 {key}  n*: {x["nstar_known"] / 2:.0f}')
         print('  simulated:', coords((f'{(j + 1) / 50:.2f}', sim(v)) for j, v in enumerate(x['win_by_u'][:45]) if v is not None))
-        print('  formula:  ', coords((f'{(j + 1) / 50:.2f}', f'{v:.0f}') for j, v in enumerate(n_local(pop, sign)[:45])))
+        print('  formula:  ', coords((f'{(j + 1) / 50:.2f}', f'{v / 2:.0f}') for j, v in enumerate(n_local(pop, sign)[:45])))
 
 
 if __name__ == '__main__':

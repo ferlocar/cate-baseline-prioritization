@@ -1,4 +1,4 @@
-"""Simulated experiments in the running example (Section 3.3 and Appendix D).
+"""Simulated experiments in the running example (Section 3.3 and Appendix E).
 
 An experiment of n people puts m = n // (2K) in each arm of each cell and draws binomial
 outcomes. Each estimated ranking's prioritization curve is averaged over R replications.

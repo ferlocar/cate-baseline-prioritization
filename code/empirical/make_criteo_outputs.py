@@ -1,4 +1,4 @@
-"""Section 6 outputs from the saved results: Tables 4 and 6, Figure 6 coordinates, and the
+"""Section 6 outputs from the saved results: Tables 4 and 8, Figure 5 coordinates, and the
 numbers quoted in the text.
 
     python make_criteo_outputs.py
@@ -54,7 +54,7 @@ def main():
     for k in LABELS:
         print(f'{LABELS[k]:26s}' + ''.join(f'{C[n][k][0]:7.2f}' for n in cols) + ''.join(f'{C[n][k][49]:7.2f}' for n in cols))
 
-    print('\nTABLE 6: Qini (mean over fractions of the curve minus random targeting), every size')
+    print('\nTABLE 8: Qini (mean over fractions of the curve minus random targeting), every size')
     print(f'{"":26s}' + ''.join(f'{fmt(n):>7s}' for n in SIZES))
     for k in LABELS:
         print(f'{LABELS[k]:26s}' + ''.join(f'{qini(C[n][k]):7.3f}' for n in SIZES))
@@ -62,7 +62,7 @@ def main():
         print(f'\nAPPENDIX TABLE: top {u}%')
         for k in LABELS:
             print(f'{LABELS[k]:26s}' + ''.join(f'{C[n][k][u - 1]:7.2f}' for n in SIZES))
-    print('\nAPPENDIX E: BATE prioritization with the spline logit (Qini, top 1%, top 50%)')
+    print('\nAPPENDIX F: BATE prioritization with the spline logit (Qini, top 1%, top 50%)')
     for n in SIZES:
         c = C[n]['bate_spline']; print(f'{fmt(n):>5s} {qini(c):6.3f} {c[0]:5.2f} {c[49]:6.2f}')
     print('\nfitted common shift by size (mean, sd):',
@@ -77,7 +77,7 @@ def main():
         print(f'{k}: ' + ', '.join(f'{u}%: {cross[k][u - 1]}' for u in [1, 5, 10, 15, 20, 25, 30, 40, 50, 60, 80]),
               f'| last fraction with a crossover: {last}% | on average: {first_from(d.mean(1) > 0)}')
 
-    print('\nFIGURE 6A: (mean baseline, effect in points, 95% half-width)')
+    print('\nFIGURE 5A: (mean baseline, effect in points, 95% half-width)')
     print(' '.join(f'({g["mean_baseline"]:.4f},{100 * g["effect"]:.2f}) +- (0,{196 * g["se"]:.2f})' for g in E['groups']))
     s = float(R['shift'][-1])
     th = np.exp(np.linspace(np.log(5e-4), np.log(0.85), 60))
@@ -85,7 +85,7 @@ def main():
     print(' '.join(f'({t:.4f},{100 * (expit(logit(t) + s) - t):.2f})' for t in th))
     print('shares above:', E['share_above'])
 
-    print('\nFIGURE 6B: gain of the X-learner over estimated BATE prioritization (u, visits per 1,000 users)')
+    print('\nFIGURE 5B: gain of the X-learner over estimated BATE prioritization (u, visits per 1,000 users)')
     for n in [3_000, 30_000, 300_000, int(SIZES[-1])]:
         d = C[n]['cate_x'] - C[n]['bate_logit']
         print(f'{fmt(n)}:', ' '.join(f'({u / 100:.2f},{d[u - 1]:.3f})' for u in range(1, 101)))

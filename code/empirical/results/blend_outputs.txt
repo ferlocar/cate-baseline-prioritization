@@ -1,0 +1,24 @@
+
+n = 10,000 (4 reps); weight (one): 0.58; weights by baseline bin (mean): [0.4  0.   0.22 0.2  0.   0.39 0.28 0.54 0.18 0.33 0.31 0.23 0.32 0.2
+ 0.18 0.19 0.15 0.34 0.67 0.71]
+                                 1%     5%    10%    25%    50%    80%    Qini
+BATE, one-parameter logit      0.62   2.97   5.30   8.60  10.23  10.60   3.703
+CATE, X-learner                1.38   4.09   5.67   8.25   9.42   9.88   3.264
+Blend, one weight              1.36   3.50   5.54   8.47   9.84  10.30   3.527
+Blend, weights by baseline     1.34   3.65   5.52   8.52   9.94  10.44   3.633
+
+n = 100,000 (3 reps); weight (one): 0.74; weights by baseline bin (mean): [0.91 0.   0.89 0.89 0.   0.88 0.75 0.57 0.72 0.5  0.58 0.31 0.31 0.26
+ 0.22 0.35 0.51 0.67 0.76 0.78]
+                                 1%     5%    10%    25%    50%    80%    Qini
+BATE, one-parameter logit      0.64   2.97   5.30   8.60  10.23  10.61   3.703
+CATE, X-learner                1.53   4.23   5.98   8.37   9.56   9.84   3.350
+Blend, one weight              1.50   4.04   5.79   8.47   9.88  10.21   3.566
+Blend, weights by baseline     1.49   4.00   5.83   8.57   9.89  10.21   3.577
+
+n = 1,000,000 (2 reps); weight (one): 0.92; weights by baseline bin (mean): [0.92 0.   0.92 0.92 0.   0.92 0.91 0.93 0.95 0.95 0.88 0.86 0.76 0.83
+ 0.84 0.92 0.93 0.94 0.94 0.9 ]
+                                 1%     5%    10%    25%    50%    80%    Qini
+BATE, one-parameter logit      0.63   2.98   5.30   8.60  10.23  10.61   3.702
+CATE, X-learner                1.81   4.66   6.31   8.74  10.19  10.52   3.877
+Blend, one weight              1.80   4.62   6.19   8.59  10.15  10.59   3.847
+Blend, weights by baseline     1.81   4.62   6.17   8.58  10.16  10.59   3.841

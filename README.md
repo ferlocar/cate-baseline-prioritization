@@ -1,15 +1,15 @@
-# From Outcome Predictions to Effect Estimates
+# When Do Experiments Improve Treatment Prioritization?
 
-Code for the paper **"From Outcome Predictions to Effect Estimates: How Much Experimental Data Does Treatment Prioritization Need?"** by Carlos Fernández-Loría, Yanfang Hou, and Jorge Loría.
+Code for the paper **"When Do Experiments Improve Treatment Prioritization?"** by Carlos Fernández-Loría, Yanfang Hou, and Jorge Loría.
 
-Organizations often decide whom to treat by ranking people on a prediction of what would happen without treatment. Ranking by estimated treatment effects instead requires experimental data. The paper studies when an experiment improves prioritization and how much data it needs, for binary outcomes in a threshold model. This repository reproduces every simulated and empirical number, table, and figure in the paper.
+Organizations often decide whom to treat by ranking people on a prediction of what would happen without treatment. Such predictions can contain everything needed for a good allocation yet put the wrong people first. The paper asks when experiments improve prioritization beyond these predictions, for binary outcomes in a threshold model: learning how to use what predictions contain can be cheap, while learning what they miss pays only near the treatment cutoff, so its value depends on how many people can be treated. This repository reproduces every simulated and empirical number, table, and figure in the paper.
 
 ## Contents
 
 ```
-code/                 simulations of the running example (Sections 3-5, Appendices C-D)
-  results/            saved simulation results
-  empirical/          the Criteo advertising experiment (Section 6, Appendix E)
+code/                 simulations of the running example (Sections 3-5, Appendices B-E)
+  results/            saved simulation results and printed outputs
+  empirical/          the Criteo advertising experiment (Section 6, Appendices D and F)
     results/          saved empirical results
 data/                 where to put the Criteo data (not included; see data/README.md)
 ```
@@ -32,26 +32,18 @@ Every table, figure coordinate, and quoted number can be printed in seconds from
 
 ```
 cd code
-python make_tables.py              # Tables 2 and 3, numbers in Section 4 and Appendix D
-python make_figures.py             # coordinates of Figures 3B, 4, and 5
+python make_outputs.py             # Tables 2 and 3
+python make_outputs_pooled.py      # Figure 4 and the pooled estimator (Appendix D)
+python make_outputs_equal.py       # learned baseline (Appendix E), Figure 7
+python make_figures.py             # Figure 3B
+python shrink_figure.py            # Figure 6
+python blend_check.py              # Table 6: reruns the blends in about 10 seconds -> results/blend_check.json
 cd empirical
-python make_criteo_outputs.py      # Tables 4 and 6, Figure 6, numbers in Section 6 and Appendix E
+python make_criteo_outputs.py      # Tables 4 and 8, Figure 5, numbers in Section 6 and Appendix F
+python make_blend_outputs.py       # Table 7
 ```
 
-To regenerate the saved results from scratch (seeds are fixed):
-
-```
-cd code
-python run_simulations.py          # about 1.5 minutes
-python run_continuous.py           # a few minutes
-cd empirical
-python prepare_data.py             # after downloading the data (see data/README.md)
-python run_criteo.py               # about 40 minutes on two cores
-python run_xlearner.py             # about an hour on two cores
-python criteo_effects.py           # a few minutes
-```
-
-`code/README.md` and `code/empirical/README.md` describe each file and map every result in the paper to the script that produces it. Appendix letters refer to the working-paper version of the paper.
+`code/README.md` lists the scripts that regenerate the saved results from scratch (seeds are fixed) and maps every result in the paper to the script that produces it; `code/empirical/README.md` does the same for the Criteo analysis, whose full run takes about two hours on two cores. Section, table, and figure numbers refer to the working-paper version of the paper.
 
 The saved results were produced with Python 3.13, numpy 2.5, scipy 1.18, pandas 3.0, and lightgbm 4.7. The simulations reproduce exactly under any numpy version with the same random generator; the empirical results may differ slightly under other lightgbm versions.
 
@@ -64,9 +56,9 @@ The empirical analysis uses the Criteo uplift dataset, version 2.1 (Diemert et a
 If you use this code, please cite the paper:
 
 ```
-@misc{fernandezloria2026outcome,
+@misc{fernandezloria2026experiments,
   author = {Fern{\'a}ndez-Lor{\'i}a, Carlos and Hou, Yanfang and Lor{\'i}a, Jorge},
-  title  = {From Outcome Predictions to Effect Estimates: How Much Experimental Data Does Treatment Prioritization Need?},
+  title  = {When Do Experiments Improve Treatment Prioritization?},
   year   = {2026},
   note   = {Working paper}
 }

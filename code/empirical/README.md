@@ -1,4 +1,4 @@
-# Criteo illustration (Section 6 and Appendix E)
+# Criteo illustration (Section 6 and Appendices D and F)
 
 Requires Python 3 with numpy, scipy, pandas, and lightgbm. Run all commands from this folder.
 
@@ -13,7 +13,7 @@ python prepare_data.py          # -> ../../data/criteo.npz (about 30 seconds)
 ## Quick start
 
 ```
-python make_criteo_outputs.py   # Tables 4 and 6, Figure 6 coordinates, and numbers quoted in the text
+python make_criteo_outputs.py   # Tables 4 and 8, Figure 5 coordinates, and numbers quoted in the text
 ```
 
 This reads the saved results in `results/` and takes a second. To regenerate them:
@@ -21,6 +21,8 @@ This reads the saved results in `results/` and takes a second. To regenerate the
 ```
 python run_criteo.py            # BATE, T-learner, and offset learner for every experiment, about 40 minutes on two cores -> results/criteo_curves.npz
 python run_xlearner.py          # the X-learner for the same experiment sizes, about an hour -> results/criteo_xlearner.npz
+python run_blend.py             # blends of estimated BATE and the X-learner, weights from split halves (Appendix D), about 15 minutes -> results/criteo_blend.npz
+python make_blend_outputs.py     # prints Table 7, the blending table (Appendix D)
 python criteo_effects.py        # effects by baseline group and evaluation noise, a few minutes -> results/criteo_effects.json
 ```
 
@@ -41,5 +43,5 @@ Seeds are fixed. `python run_criteo.py --quick` runs a small grid for testing.
 | `prepare_data.py` | Converts the CSV to `../../data/criteo.npz` |
 | `run_criteo.py` | Fits estimated BATE prioritization (one-parameter logit, and a spline logit not reported in the paper) and the T- and offset learners for every experiment size and replication, and saves their curves |
 | `run_xlearner.py` | The X-learner, which also learns from the training controls |
-| `criteo_effects.py` | Effects by baseline group (Figure 6A) and evaluation noise from 20 folds of the held-out data |
+| `criteo_effects.py` | Effects by baseline group (Figure 5A) and evaluation noise from 20 folds of the held-out data |
 | `make_criteo_outputs.py` | Prints the tables, figure coordinates, crossovers, and quoted numbers |

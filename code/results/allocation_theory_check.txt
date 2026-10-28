@@ -1,0 +1,6 @@
+K= 20 n= 4,000: loss by share 6.60 5.28 4.72 4.04 3.73 3.53 3.45 3.44 3.46 3.61 3.80 4.17 4.92 5.94
+        empirical argmin 0.100; fitted best share 0.102; predicted 1/(1+sqrt(4K+1)) = 0.100; A/B fitted 78 vs 4K+1 = 81; loss balanced / best = 1.73
+K= 50 n=10,000: loss by share 4.37 3.90 3.64 3.44 3.29 3.26 3.26 3.31 3.40 3.52 3.78 4.24 4.96 6.02
+        empirical argmin 0.060; fitted best share 0.064; predicted 1/(1+sqrt(4K+1)) = 0.066; A/B fitted 212 vs 4K+1 = 201; loss balanced / best = 1.85
+K=200 n=40,000: loss by share 3.24 3.12 3.07 3.04 3.04 3.08 3.15 3.23 3.33 3.51 3.75 4.24 5.00 6.05
+        empirical argmin 0.045; fitted best share 0.025; predicted 1/(1+sqrt(4K+1)) = 0.034; A/B fitted 1556 vs 4K+1 = 801; loss balanced / best = 1.99
