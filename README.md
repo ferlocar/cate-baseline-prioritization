@@ -7,9 +7,9 @@ Organizations often decide whom to treat by ranking people on a prediction of wh
 ## Contents
 
 ```
-code/                 simulations of the running example (Sections 3-5, Appendices B-E)
+code/                 simulations of the running example (Sections 3-5, Appendices B-D)
   results/            saved simulation results and printed outputs
-  empirical/          the Criteo advertising experiment (Section 6, Appendices D and F)
+  empirical/          the Criteo advertising experiment (Section 6, Appendix E)
     results/          saved empirical results
 data/                 where to put the Criteo data (not included; see data/README.md)
 ```
@@ -33,14 +33,11 @@ Every table, figure coordinate, and quoted number can be printed in seconds from
 ```
 cd code
 python make_outputs.py             # Tables 2 and 3
-python make_outputs_pooled.py      # Figure 4 and the pooled estimator (Appendix D)
-python make_outputs_equal.py       # learned baseline (Appendix E), Figure 7
+python make_outputs_pooled.py      # Figure 4 and the pooled estimator (Appendix D.1, Table 6)
+python make_outputs_equal.py       # learned baseline (Appendix D.2), Figure 6
 python make_figures.py             # Figure 3B
-python shrink_figure.py            # Figure 6
-python blend_check.py              # Table 6: reruns the blends in about 10 seconds -> results/blend_check.json
 cd empirical
-python make_criteo_outputs.py      # Tables 4 and 8, Figure 5, numbers in Section 6 and Appendix F
-python make_blend_outputs.py       # Table 7
+python make_criteo_outputs.py      # Tables 4 and 8, Figure 5, numbers in Section 6 and Appendix E
 ```
 
 `code/README.md` lists the scripts that regenerate the saved results from scratch (seeds are fixed) and maps every result in the paper to the script that produces it; `code/empirical/README.md` does the same for the Criteo analysis, whose full run takes about two hours on two cores. Section, table, and figure numbers refer to the working-paper version of the paper.

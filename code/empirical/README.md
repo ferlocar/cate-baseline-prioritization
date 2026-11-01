@@ -1,4 +1,4 @@
-# Criteo illustration (Section 6 and Appendices D and F)
+# Criteo illustration (Section 6 and Appendix E)
 
 Requires Python 3 with numpy, scipy, pandas, and lightgbm. Run all commands from this folder.
 
@@ -21,8 +21,8 @@ This reads the saved results in `results/` and takes a second. To regenerate the
 ```
 python run_criteo.py            # BATE, T-learner, and offset learner for every experiment, about 40 minutes on two cores -> results/criteo_curves.npz
 python run_xlearner.py          # the X-learner for the same experiment sizes, about an hour -> results/criteo_xlearner.npz
-python run_blend.py             # blends of estimated BATE and the X-learner, weights from split halves (Appendix D), about 15 minutes -> results/criteo_blend.npz
-python make_blend_outputs.py     # prints Table 7, the blending table (Appendix D)
+python run_blend.py             # blends of estimated BATE and the X-learner, weights from split halves (not in the paper), about 15 minutes -> results/criteo_blend.npz
+python make_blend_outputs.py     # prints the blending table (not in the paper)
 python criteo_effects.py        # effects by baseline group and evaluation noise, a few minutes -> results/criteo_effects.json
 ```
 
